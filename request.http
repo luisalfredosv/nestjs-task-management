@@ -1,0 +1,75 @@
+@baseUrl =http://localhost:3050
+@contentType =application/json
+
+
+# @name registrer
+POST {{baseUrl}}/auth/signup HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+    "username": "Luis",
+    "password": "Lasv12795*"
+}
+
+###
+
+# @name login
+POST {{baseUrl}}/auth/signin HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+    "username": "Luis",
+    "password": "Lasv12795*"
+}
+
+###
+
+@authToken =Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikx1aXMiLCJpYXQiOjE2MjQzMTA3NDgsImV4cCI6MTYyNDMxNDM0OH0.QQGocL4nDBkefrlBhvF5hr0PY1F_Dpg3-ijI4abCuz4
+
+# @name tasks/add
+POST  {{baseUrl}}/tasks HTTP/1.1
+Authorization: {{authToken}}
+Content-Type: {{contentType}}
+
+{
+    "title": "Comer Perro Caliente",
+    "description": "Task Desc"
+}
+
+###
+
+# @name tasks/update
+PATCH  {{baseUrl}}/tasks/e596f71f-1abd-4f42-8c26-6259adea4380/status HTTP/1.1
+Authorization: {{authToken}}
+Content-Type: {{contentType}}
+
+{
+    "status": "IN_PROGRESS"
+}
+
+###
+
+# @name tasks/search
+GET {{baseUrl}}/tasks?status=OPEN&search= HTTP/1.1
+Authorization: {{authToken}}
+
+###
+
+
+# @name tasks/get/all
+GET {{baseUrl}}/tasks HTTP/1.1
+Authorization: {{authToken}}
+
+###
+
+# @name tasks/getById
+GET {{baseUrl}}/tasks/e596f71f-1abd-4f42-8c26-6259adea4380 HTTP/1.1
+Authorization: {{authToken}}
+
+###
+
+# @name tasks/update
+DELETE   {{baseUrl}}/tasks/50317060-bee1-4f56-a902-c2c3c07c1ad5 HTTP/1.1
+Authorization: {{authToken}}
+
+###
