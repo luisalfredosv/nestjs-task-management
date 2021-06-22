@@ -24,7 +24,7 @@ Content-Type: {{contentType}}
 
 ###
 
-@authToken =Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikx1aXMiLCJpYXQiOjE2MjQzMTA3NDgsImV4cCI6MTYyNDMxNDM0OH0.QQGocL4nDBkefrlBhvF5hr0PY1F_Dpg3-ijI4abCuz4
+@authToken =Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikx1aXMiLCJpYXQiOjE2MjQzNzA4MjQsImV4cCI6MTYyNDM3NDQyNH0.IsmGXIsRlziy7_E0F2R--KvDnJCkJXSvvro7zvW-3u4
 
 # @name tasks/add
 POST  {{baseUrl}}/tasks HTTP/1.1
@@ -32,8 +32,8 @@ Authorization: {{authToken}}
 Content-Type: {{contentType}}
 
 {
-    "title": "Comer Perro Caliente",
-    "description": "Task Desc"
+    "title": "Hacer deploy",
+    "description": "desplegar"
 }
 
 ###
