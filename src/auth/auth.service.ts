@@ -22,7 +22,7 @@ export class AuthService {
 
   async signIn(
     authCredentialsDto: AuthCredentialsDto,
-  ): Promise<{ access_token: string }> {
+  ): Promise<{ accessToken: string }> {
     const { username, password } = authCredentialsDto;
     const user = await this.usersRepository.findOne({ username });
 
@@ -30,7 +30,7 @@ export class AuthService {
       const payload: JwtPayload = { username };
       const accessToken = await this.jwtService.sign(payload);
       return {
-        access_token: accessToken,
+        accessToken: accessToken,
       };
     } else {
       throw new UnauthorizedException('Please check your login credentials');
