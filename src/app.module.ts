@@ -1,3 +1,4 @@
+import * as dotenv from 'dotenv';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -8,25 +9,29 @@ import { configValidationSchema } from './config.schema';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      // envFilePath: [`.env.stage.${process.env.STAGE}`],
-      envFilePath: [`.env.stage.dev`],
-      validationSchema: configValidationSchema,
+      envFilePath: ['.env.production'],
+      isGlobal: true,
+      validationSchema: configValidationSchema
     }),
-    TasksModule,
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
         type: 'postgres',
         autoLoadEntities: true,
         synchronize: true,
-        host: configService.get('DB_HOST'),
-        port: configService.get('DB_PORT'),
-        username: configService.get('DB_USERNAME'),
+        host: configService.get<string>('DB_HOST'),
+        port: configService.get<number>('DB_PORT'),
+        username: configService.get<string>('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
-        database: configService.get('DB_DATABASE'),
+        database: configService.get<string>('DB_DATABASE'),
+        ssl:{
+          rejectUnauthorized: false,
+        }
       }),
+      inject: [ConfigService],
+
     }),
+    TasksModule,
     AuthModule,
   ],
 })
