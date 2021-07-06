@@ -6,6 +6,10 @@ import { TransformInterceptor } from './transform.interceptor';
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
+
+var SERVER_HOST_PORT = process.env.YOUR_PORT || process.env.PORT || 5000;
+var SERVER_HOST_URI = process.env.YOUR_HOST || "0.0.0.0";
+
 async function bootstrap() {
   const logger = new Logger();
 
@@ -21,9 +25,9 @@ async function bootstrap() {
   // somewhere in your initialization file
   app.use(compression());
   
-  const SERVER_HOST_PORT = configService.get<number>('SERVER_HOST_PORT');
-  const SERVER_HOST_URI = configService.get<string>('SERVER_HOST_URI');
-  await app.listen(SERVER_HOST_PORT || 80);
+  // const SERVER_HOST_PORT = configService.get<number>('SERVER_HOST_PORT');
+  // const SERVER_HOST_URI = configService.get<string>('SERVER_HOST_URI');
+  await app.listen(SERVER_HOST_PORT, SERVER_HOST_URI);
   logger.log(`[Application listening] ${ SERVER_HOST_URI } on port ${ SERVER_HOST_PORT }`);
 
 }
