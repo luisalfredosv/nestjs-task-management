@@ -10,6 +10,8 @@ async function bootstrap() {
   const logger = new Logger();
 
   const app = await NestFactory.create(AppModule);
+  
+  app.enableCors();
   let configService: ConfigService = app.get(ConfigService);
 
   app.useGlobalPipes(new ValidationPipe());
