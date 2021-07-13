@@ -11,7 +11,7 @@ export const configValidationSchema = Joi.object({
   DB_PASSWORD: Joi.string().required(),
   DB_DATABASE: Joi.string().required(),
   JWT_SECRECT_ACCESS: Joi.string().required(),
-  // NODE_ENV: Joi.string().valid('development', 'production')
-  // .default('development'),
+  NODE_ENV: Joi.string().valid('development', 'production')
+  .default('development'),
   
 });
