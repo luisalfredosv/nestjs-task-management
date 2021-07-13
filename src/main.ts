@@ -16,7 +16,7 @@ async function bootstrap() {
   app.useGlobalInterceptors(new TransformInterceptor());
   app.use(compression());
 
-  const SERVER_HOST_PORT = configService.get<number>('SERVER_HOST_PORT') || 3333;
+  const SERVER_HOST_PORT = process.env.PORT || 3001;
   await app.listen(SERVER_HOST_PORT);
   logger.log(`[Application listening] on port ${ SERVER_HOST_PORT }`);
 }
